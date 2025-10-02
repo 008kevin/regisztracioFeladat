@@ -5,29 +5,29 @@ const registrationButton = document.getElementById("registration-button");
 const errorText = document.getElementById("registration-error");
 
 registrationButton.addEventListener("click", () => {
-  let email = emailInput.value;
+  let email = emailInput.value.trim();
   let valid = true;
+
+  let emailIncorrect = false;
 
   // email kukac ellenörzés
   if (!email.includes("@")) {
     emailInput.style.borderColor = "red";
     errorText.innerText = "Nincs @ az email címbe";
-    errorText.style.display = "block";
+    emailIncorrect = true;
     valid = false;
   } else {
     emailInput.style.borderColor = null;
-    errorText.style.display = "none";
   }
 
   // email pont ellenőrzés
   if (!email.includes(".")) {
     emailInput.style.borderColor = "red";
     errorText.innerText = "Az e-mail cím nem tartalmaz pontot";
-    errorText.style.display = "block";
+    emailIncorrect = true;
     valid = false;
-  } else {
+  } else if (!emailIncorrect) {
     emailInput.style.borderColor = null;
-    errorText.style.display = "none";
   }
 
   // email TLD ellenőrzés
@@ -36,10 +36,10 @@ registrationButton.addEventListener("click", () => {
     emailInput.style.borderColor = "red";
     errorText.innerText =
       "Az e-mail cím utolsó pontja után csak 2, vagy 3 karkater állhat";
+    emailIncorrect = true;
     valid = false;
-  } else {
+  } else if (!emailIncorrect) {
     emailInput.style.borderColor = null;
-    errorText.style.display = "none";
   }
 
   // jelszó ugyan az-e
@@ -51,10 +51,12 @@ registrationButton.addEventListener("click", () => {
   } else {
     passwordInput.style.borderColor = null;
     passwordConfirmInput.style.borderColor = null;
-    errorText.style.display = "none";
   }
 
   if (valid) {
+    errorText.style.display = "none";
     window.alert("Sikeres bejelentkezés");
+  } else {
+    errorText.style.display = "block";
   }
 });
