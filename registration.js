@@ -42,6 +42,19 @@ registrationButton.addEventListener("click", () => {
     emailInput.style.borderColor = null;
   }
 
+  // jelszo van e
+  if (passwordInput.value == "") {
+    passwordInput.style.borderColor = "red";
+    errorText.innerText = "Írja be a jelszót";
+    valid = false;
+  }
+
+  if (passwordConfirmInput.value == "") {
+    passwordConfirmInput.style.borderColor = "red";
+    errorText.innerText = "Írja be a jelszó ismétlését";
+    valid = false;
+  }
+
   // jelszó ugyan az-e
   if (passwordInput.value != passwordConfirmInput.value) {
     passwordInput.style.borderColor = "red";
