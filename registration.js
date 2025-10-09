@@ -4,6 +4,9 @@ const passwordConfirmInput = document.getElementById("password-confirm-input");
 const registrationButton = document.getElementById("registration-button");
 const errorText = document.getElementById("registration-error");
 
+/**
+ * Regisztráció gomb eseménykezelő
+ */
 registrationButton.addEventListener("click", () => {
   let email = emailInput.value.trim();
   let valid = true;
@@ -16,8 +19,6 @@ registrationButton.addEventListener("click", () => {
     errorText.innerText = "Nincs @ az email címbe";
     emailIncorrect = true;
     valid = false;
-  } else {
-    emailInput.style.borderColor = null;
   }
 
   // email pont ellenőrzés
@@ -26,8 +27,6 @@ registrationButton.addEventListener("click", () => {
     errorText.innerText = "Az e-mail cím nem tartalmaz pontot";
     emailIncorrect = true;
     valid = false;
-  } else if (!emailIncorrect) {
-    emailInput.style.borderColor = null;
   }
 
   // email TLD ellenőrzés
@@ -38,7 +37,10 @@ registrationButton.addEventListener("click", () => {
       "Az e-mail cím utolsó pontja után csak 2, vagy 3 karkater állhat";
     emailIncorrect = true;
     valid = false;
-  } else if (!emailIncorrect) {
+  }
+
+  // ha nincs hiba emailben
+  if (!emailIncorrect) {
     emailInput.style.borderColor = null;
   }
 
